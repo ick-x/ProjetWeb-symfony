@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Contact{% endblock %}
+
+{% block body %}
+    <h1>Add Contact</h1>
+
+    {{ form_start(createContactForm) }}
+        {{ form_row(createContactForm.contactName) }}
+        {{ form_row(createContactForm.contactLastName) }}
+        {{ form_row(createContactForm.contactPhone) }}
+        {{ form_row(createContactForm.contactMail) }}
+        {{ form_row(createContactForm.contactAddress) }}
+        {{ form_row(createContactForm._token) }}
+
+        <button type="submit" class="btn">Add</button>
+{% endblock %}
