@@ -19,7 +19,18 @@ class ContactController extends AbstractController
     public function index(UserRepository $repository): Response
     {
 
-        $contactList = $repository->find(17)->getContacts();
+        $contactList = $repository->find($this->getUser())->getContacts();
+
+        return $this->render('contact/index.html.twig', [
+            'controller_name' => 'ContactController',
+            'contact_list'=>$contactList
+        ]);
+    }
+    #[Route('/contactb', name: 'app_contactb')]
+    public function indexb(ContactRepository $repository): Response
+    {
+
+        $contactList = $repository->findByUser($this->getUser());
 
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',

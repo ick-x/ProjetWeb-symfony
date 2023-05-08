@@ -42,10 +42,10 @@ class ContactRepository extends ServiceEntityRepository
     /**
      * @return Contact[] Returns an array of Contact objects
      */
-    public function findByExampleField($value): array
+    public function findByUser($value): array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.user_id = :val')
+            ->andWhere('c.user = :val')
             ->setParameter('val', $value)
             ->orderBy('c.contactName', 'ASC')
             ->getQuery()
