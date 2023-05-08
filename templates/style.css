@@ -2,6 +2,11 @@ body {
   font-family: "Century Gothic";
 }
 
+p {
+  text-justify: auto;
+  padding : 0 10%;  
+}
+
 h1 {
   padding: 40px 0;
   text-align: center;

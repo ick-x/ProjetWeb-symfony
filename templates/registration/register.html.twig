@@ -1,19 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} 
+{% block title %}Register{% endblock %} 
 
-{% block title %}Register{% endblock %}
+{% block body %} 
 
-{% block body %}
-    <h1>Register</h1>
+{% apply inline_css(source("style.css"))%}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.phoneNumber) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm._token) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'password'
-        }) }}
+<h1>Register</h1>
 
-        <button type="submit" class="btn">Register</button>
+<div class="flex-container-column">
+  {{ form_start(registrationForm) }}
+  {{ form_row(registrationForm.name) }}
+  {{ form_row(registrationForm.lastName) }}
+  {{ form_row(registrationForm.phoneNumber) }}
+  {{ form_row(registrationForm.email) }}
+  {{ form_row(registrationForm._token) }}
+  {{
+    form_row(registrationForm.plainPassword, {
+      label: "password"
+    })
+  }}
+
+  <button type="submit" class="btn">Register</button>
+</div>
+{%endapply%} 
 {% endblock %}
