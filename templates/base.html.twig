@@ -83,7 +83,7 @@
           <script>
             function logout(event) {
               event.preventDefault();
-              if ({{user.name}}!=null&&window.confirm("Are you sure you want to logout?")) {
+              if ({{user.name!=null}}&&window.confirm("Are you sure you want to logout?")) {
                 window.location.href = "/logout";
               }
             }
