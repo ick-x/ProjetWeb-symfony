@@ -2,3 +2,8 @@ controllers:
     resource: ../src/Controller/
     type: attribute
 
+
+contact_add:
+    path: /contact/add
+    controller: App\Controller\ContactController::addContact
+    methods: [GET, POST]

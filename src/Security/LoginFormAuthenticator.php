@@ -2,7 +2,6 @@
 
 namespace App\Security;
 
-use PhpParser\Node\Scalar\String_;
 use SessionHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
