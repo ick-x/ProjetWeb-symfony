@@ -2,9 +2,13 @@
 
 namespace App\Security;
 
+use PhpParser\Node\Scalar\String_;
+use SessionHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
@@ -20,8 +24,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
-
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private SessionHandlerInterface $session,private UrlGeneratorInterface $urlGenerator)
     {
     }
 
@@ -42,12 +45,12 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
+        if($request->getSession()->has('_security.main.target_path')) {
+            $target = $request->getSession()->get('_security.main.target_path');
+            $request->getSession()->remove('_security.main.target_path');
+            if($target!="http://projetweb.test/logout")return new RedirectResponse($target);
         }
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
-
-
+       return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
     protected function getLoginUrl(Request $request): string

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\CreateContactFormType;
+use App\Helper;
 use App\Repository\ContactRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,19 +16,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
+    public function __construct(private Helper $helper){}
+
     #[Route('/contact', name: 'app_contact')]
-    public function index(UserRepository $repository): Response
-    {
-
-        $contactList = $repository->find($this->getUser())->getContacts();
-
-        return $this->render('contact/index.html.twig', [
-            'controller_name' => 'ContactController',
-            'contact_list'=>$contactList
-        ]);
-    }
-    #[Route('/contactb', name: 'app_contactb')]
-    public function indexb(ContactRepository $repository): Response
+    public function index(ContactRepository $repository): Response
     {
 
         $contactList = $repository->findByUser($this->getUser());

@@ -15,9 +15,7 @@
   {{ form_row(registrationForm.email) }}
   {{ form_row(registrationForm._token) }}
   {{
-    form_row(registrationForm.plainPassword, {
-      label: "password"
-    })
+    form_row(registrationForm.password)
   }}
 
   <button type="submit" class="btn">Register</button>

@@ -18,4 +18,12 @@ class Helper
        $this->logger->info($user->getUserIdentifier());
        return $user;
     }
+
+    public function redirect($user){
+        if($$user==null)
+            return $this->redirectToRoute("app_login");
+        return $this->render("home/index.html.twig",[
+            "user"=>$this->getUser()
+        ]);
+    }
 }
