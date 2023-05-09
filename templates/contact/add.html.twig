@@ -3,8 +3,12 @@
 {% block title %}Add Contact{% endblock %}
 
 {% block body %}
+
+{% apply inline_css(source("style.css"))%}
+
     <h1>Add Contact</h1>
 
+    <div class="flex-container-column">
     {{ form_start(createContactForm) }}
         {{ form_row(createContactForm.contactName) }}
         {{ form_row(createContactForm.contactLastName) }}
@@ -14,4 +18,6 @@
         {{ form_row(createContactForm._token) }}
 
         <button type="submit" class="btn">Add</button>
+    </div>
+    {%endapply%}
 {% endblock %}

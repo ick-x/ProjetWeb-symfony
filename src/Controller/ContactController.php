@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('php bin/console doctrine:database:create', name: 'app_contact')]
     public function index(UserRepository $repository): Response
     {
 

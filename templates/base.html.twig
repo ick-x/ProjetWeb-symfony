@@ -1,19 +1,78 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"
+    />
+    {# Run `composer require symfony/webpack-encore-bundle` to start using
+    Symfony UX #} {% block stylesheets %}
+    {{
+      encore_entry_link_tags("app")
+    }}
+    {% endblock %} {% block javascripts %}
+    {{
+      encore_entry_script_tags("app")
+    }}
+    {% endblock %}
+  </head>
+  <body>
+    <style>
+      body {
+        font-family: "Century Gothic";
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+      li {
+        float: left;
+        border-right: 1px solid #bbb;
+        border-left: 1px solid #bbb;
+
+      }
+
+      li:last-child {
+        border-right: none;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: purple;
+      }
+    </style>
+
+    <ul>
+      {% if app.user %}
+      <li>
+        <a class="active" href="">{{ user.name }}</a>
+      </li>
+      {% endif %}
+
+      <li><a href="/">Home</a></li>
+      <li><a href="/contact">Contacts</a></li>
+
+      <li style="float: right"><a href="/register">Register</a></li>
+      <li style="float: right"><a href="/login">Log in</a></li>
+      <li style="float: right"><a href="/logout">Log out</a></li>
+    </ul>
+    {% block body %} {% endblock %}
+  </body>
 </html>
