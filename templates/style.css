@@ -36,3 +36,22 @@ button {
   padding: 5px;
   font-size: 14px;
 }
+
+.add_contact-button {
+  padding : 10px 25px;
+  margin : 20px;
+  font-size: 16px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.contact {
+  margin : 20px 75px;
+}
+
+.contact_list {
+  margin : 0; 
+}
