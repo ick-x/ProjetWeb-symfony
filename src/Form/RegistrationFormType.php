@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Type;
 
 class RegistrationFormType extends AbstractType
 {
@@ -40,19 +42,34 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Confirm Password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
+                'constraints' => $this->getConstraints()
+
             ])
         ;
+    }
+    protected function getConstraints(): array
+    {
+        return [
+            new NotBlank(),
+            new Type('string'),
+            new Length(['min' => 8]),
+            new Regex([
+                'pattern' => '/\d+/i',
+                'message'=>'password Should contains at least 1 digit'
+            ]),
+            new Regex([
+                'pattern' => '/[#?!@$%^&*-]+/i',
+                'message'=>'password Should contains at least 1 special char'
+            ]),
+            new Regex([
+                'pattern' => '/[a-z]+/i',
+                'message'=>'password Should contains at least 1 lower case char'
+            ]),
+            new Regex([
+                'pattern' => '/[A-Z]+/i',
+                'message'=>'password Should contains at least 1 upper case char'
+            ])
+        ];
     }
 
     public function configureOptions(OptionsResolver $resolver): void
