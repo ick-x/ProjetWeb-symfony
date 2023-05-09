@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+    <script>
+
+    </script>
   <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -76,7 +79,15 @@
 
       <li style="float: right"><a href="/register">Register</a></li>
       <li style="float: right"><a href="/login">Log in</a></li>
-      <li style="float: right"><a href="/logout">Log out</a></li>
+      <li style="float: right"><a href="#"onclick="logout(event)">Log out</a></li>*
+          <script>
+            function logout(event) {
+              event.preventDefault();
+              if (window.confirm("Are you sure you want to logout?")) {
+                window.location.href = "/logout";
+              }
+            }
+          </script>
     </ul>
     {% block body %} {% endblock %}
   </body>
