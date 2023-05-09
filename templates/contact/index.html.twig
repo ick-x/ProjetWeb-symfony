@@ -3,15 +3,31 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
-        {%for contact in contact_list%}
+    {% apply inline_css(source("style.css"))%}
 
+    <button class="add_contact-button"><a href="{{ path('contact_add') }}">Add</a></button>
+    <h1 class="contact_list">Contact List :</h1>
+    <div class="flex-container-column">
+        {%for contact in contact_list%}
             <div class="contact">
-                <h3>{{contact.contactName}}</h3>
-                <h3>{{contact.contactLastName}}</h3>
-                <h3>{{contact.contactAddress}}</h3>
-                <h3>{{contact.contactMail}}</h3>
-                <h3>{{contact.contactPhone}}</h3>
+                <table style="width:100%">
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th> 
+                    <th>Adress</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+                <tr>
+                    <td>{{contact.contactName}}</td>
+                    <td> {{contact.contactLastName}}</td>
+                    <td>{{contact.contactAddress}}</td>
+                    <td>{{contact.contactMail}}</td>
+                    <td>{{contact.contactPhone}}</td>
+                </tr>
+             </table>
             </div>
         {% endfor %}
-        <button><a href="{{ path('contact_add') }}">Add</a></button>
+    </div>
+    {% endapply %}
 {% endblock %}
