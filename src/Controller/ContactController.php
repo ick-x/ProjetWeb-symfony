@@ -46,6 +46,7 @@ class ContactController extends AbstractController
 
             $entityManager->persist($contact);
             $entityManager->flush();
+            return $this->redirectToRoute('app_add_contact');
         }
 
         return $this->render("contact/add.html.twig",[
